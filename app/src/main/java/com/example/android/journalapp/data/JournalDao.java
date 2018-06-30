@@ -13,8 +13,8 @@ import java.util.List;
 @Dao
 public interface JournalDao {
 
-    @Query("SELECT * FROM thejournal ORDER BY id")
-    LiveData<List<JournalEntry>> loadAllEntries();
+    @Query("SELECT * FROM thejournal WHERE fireBaseUid = :fireBaseUid ORDER BY id")
+    LiveData<List<JournalEntry>> loadAllEntries(String fireBaseUid);
 
     @Insert
     void insertEntry(JournalEntry journalEntry);

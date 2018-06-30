@@ -47,20 +47,33 @@ public class JournalEntry {
     }
 
     private String message;
+
+    public String getFireBaseUid() {
+        return fireBaseUid;
+    }
+
+    public void setFireBaseUid(String fireBaseUid) {
+        this.fireBaseUid = fireBaseUid;
+    }
+
+    private String fireBaseUid;
+
     @ColumnInfo(name = "written_on")
     private Date writtenOn;
 
     @Ignore
-    public JournalEntry(String title, String message, Date writtenOn){
+    public JournalEntry(String title, String message, Date writtenOn, String fireBaseUid){
         this.title = title;
         this.message = message;
         this.writtenOn = writtenOn;
+        this.fireBaseUid = fireBaseUid;
     }
 
-    public JournalEntry(int id, String title, String message, Date writtenOn){
+    public JournalEntry(int id, String title, String message, Date writtenOn, String fireBaseUid){
         this.title = title;
         this.id = id;
         this.message = message;
         this.writtenOn = writtenOn;
+        this.fireBaseUid = fireBaseUid;
     }
 }

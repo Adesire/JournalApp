@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.android.journalapp.data.AppDatabase;
 import com.example.android.journalapp.data.JournalEntry;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class MainViewModel extends AndroidViewModel {
         super(application);
         AppDatabase database = AppDatabase.getInstance(this.getApplication());
         Log.d(TAG, "Actively retrieving the task from the Database");
-        entry = database.journalDao().loadAllEntries();
+        entry = database.journalDao().loadAllEntries(MainActivity.FIREBASE_USER_ID);
     }
 
     public LiveData<List<JournalEntry>> getEntry() { return entry; }

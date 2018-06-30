@@ -8,15 +8,20 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.android.journalapp.data.AppDatabase;
 import com.example.android.journalapp.data.JournalEntry;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -68,7 +73,8 @@ public class DisplayJournalActivity extends AppCompatActivity implements Journal
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent journalActivityIntent = new Intent(DisplayJournalActivity.this,JournalActivity.class);
+                Intent journalActivityIntent =
+                        new Intent(DisplayJournalActivity.this,JournalActivity.class);
                 startActivity(journalActivityIntent);
             }
         });
@@ -96,5 +102,24 @@ public class DisplayJournalActivity extends AppCompatActivity implements Journal
         intent.putExtra(JournalActivity.EXTRA_ENTRY_ID,itemId);
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Sign-Out").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String title = item.getTitle() == null?"":item.getTitle().toString();
+        if(title.equals("Sign-Out")) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this,MainActivity.class);
+            finish();
+            startActivity(intent);
+        }else
+            onBackPressed();
+        return true;
     }
 }

@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.example.android.journalapp.data.AppDatabase;
 import com.example.android.journalapp.data.JournalEntry;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 
@@ -95,11 +96,13 @@ public class JournalActivity extends AppCompatActivity {
     }
 
     public void onSaveButtonClicked() {
+        if (messageEditText.getText().toString().isEmpty() || titleEditText.getText().toString().isEmpty())
+            return;
         String title = titleEditText.getText().toString();
         String message = messageEditText.getText().toString();
         Date date = new Date();
 
-        final JournalEntry entry = new JournalEntry(title, message, date);
+        final JournalEntry entry = new JournalEntry(title, message, date, MainActivity.FIREBASE_USER_ID);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {

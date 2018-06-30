@@ -16,10 +16,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String FIREBASE_USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    String toastMessage;
 
     private EditText mEmailView,mPasswordView;
     private Button mLoginBtn,mRegBtn;
@@ -37,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(mUser != null) {
+        mUser.getUid();
+        startActivityIntent();
+        }
     }
 
     public void signInExistingUser(View view) {
@@ -67,12 +82,11 @@ public class MainActivity extends AppCompatActivity {
                 if(!task.isSuccessful()){
 
                     Log.d(TAG,"Problem signing in: "+ task.getException());
-                    showErrorToast("There was a problem signing in");
+                    toastMessage = getString(R.string.error);
+                    showErrorToast(toastMessage);
 
                 }else{
-                    Intent intent = new Intent(MainActivity.this,DisplayJournalActivity.class);
-                    finish();
-                    startActivity(intent);
+                    startActivityIntent();
                 }
 
             }
@@ -81,5 +95,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void showErrorToast(String message){
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    }
+
+    private void startActivityIntent(){
+        Intent intent = new Intent(MainActivity.this,DisplayJournalActivity.class);
+        finish();
+        startActivity(intent);
     }
 }
