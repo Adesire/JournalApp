@@ -96,7 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
         String email= mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Log.d(TAG,"create user onComplete: "+task.isSuccessful());
@@ -107,7 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
                     showErrorToast("Register attempt failed");
 
                 }else{
-                    Intent intent = new Intent(RegisterActivity.this,DisplayJournalActivity.class);
+                    Intent intent =
+                            new Intent(RegisterActivity.this,DisplayJournalActivity.class);
                     finish();
                     startActivity(intent);
                 }

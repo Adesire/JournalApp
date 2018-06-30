@@ -20,7 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String FIREBASE_USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    public static final String FIREBASE_USER_ID =
+            FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -73,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this,"Login in Progress...",Toast.LENGTH_SHORT).show();
 
-         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+         mAuth.signInWithEmailAndPassword(email,password)
+                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 

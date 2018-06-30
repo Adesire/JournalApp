@@ -102,7 +102,8 @@ public class JournalActivity extends AppCompatActivity {
         String message = messageEditText.getText().toString();
         Date date = new Date();
 
-        final JournalEntry entry = new JournalEntry(title, message, date, MainActivity.FIREBASE_USER_ID);
+        final JournalEntry entry =
+                new JournalEntry(title, message, date, MainActivity.FIREBASE_USER_ID);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
