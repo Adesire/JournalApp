@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Journal App</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="my_journal">MY JOURNAL</string>
+    <string name="login">Login</string>
+    <string name="title">Title</string>
+    <string name="date">00/00/0000</string>
+    <string name="save">SAVE</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up_btn">SIGN UP</string>
+    <string name="register">Register</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">Password too short or does not match</string>
+    <string name="update">Update</string>
+    <string name="image">image</string>
+    <string name="number">1.</string>
+    <string name="thoughts">Enter your thoughts here</string>
+</resources>
